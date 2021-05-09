@@ -5,8 +5,95 @@
     <title>Registrace na letní dětský tábor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 </head>
 <body>
-    TODO
+<div class="container">
+    <form th:action="@{/}" method="post">
+        <h1>Registrace na letní dětský tábor</h1>
+        <div class="row mb-3">
+            <label for="meno" class="col-sm-2 col-form-label">Meno:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="meno" th:field="${formular.meno}" />
+                <div class="error" th:if="${#fields.hasErrors('formular.meno')}" th:errors="${formular.meno}"></div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="priezvisko" class="col-sm-2 col-form-label">Priezvisko:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="priezvisko" th:field="${formular.priezvisko}" />
+                <div class="error" th:if="${#fields.hasErrors('formular.priezvisko')}" th:errors="${formular.priezvisko}"></div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="datum-narodenia" class="col-sm-2 col-form-label">Dátum narodenia:</label>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="datum-narodenia" th:field="${formular.datumNarodenia}" />
+                <div class="error" th:if="${#fields.hasErrors('formular.datumNarodenia')}" th:errors="${formular.datumNarodenia}"></div>
+            </div>
+        </div>
+
+        <fieldset class="row mb-3">
+            <legend class="col-form-label col-sm-2 pt-0">Pohlavie</legend>
+            <div class="col-sm-3">
+                <div class="form-check" th:each="pohlavie : ${T(cz.czechitas.java2webapps.ukol5.controller.Pohlavie).values()}">
+                    <input class="form-check-input" type="radio" name="pohlavie" id="pohlavie" th:field="${formular.pohlavie}" th:value="${pohlavie}">
+                    <label class="form-check-label" for="pohlavie" th:text="${pohlavie.displayValue}">Chlapec</label>
+                </div>
+                <div class="error" th:if="${#fields.hasErrors('formular.pohlavie')}" th:errors="${formular.pohlavie}"></div>
+            </div>
+        </fieldset>
+
+        <fieldset class="row mb-3">
+            <legend class="col-form-label col-sm-2 pt-0">Turnus</legend>
+            <div class="col-sm-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="turnus1" th:field="${formular.turnus}" value="5. až 11. července">
+                    <label class="form-check-label" for="turnus1">5. až 11. července</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="turnus2" th:field="${formular.turnus}" value="12. až 18. července">
+                    <label class="form-check-label" for="turnus2">12. až 18. července</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="turnus3" th:field="${formular.turnus}" value="19. až 25. července">
+                    <label class="form-check-label" for="turnus3">19. až 25. července</label>
+                </div>
+                <div class="error" th:if="${#fields.hasErrors('formular.turnus')}" th:errors="${formular.turnus}"></div>
+            </div>
+        </fieldset>
+
+        <div class="row mb-3">
+            <label for="email" class="col-form-label col-sm-2 pt-0">Športy:</label>
+            <div class="col-sm-3">
+                <div th:each="sport : ${T(cz.czechitas.java2webapps.ukol5.controller.Sport).values()}">
+                    <input class="form-check-input" id="sport" type="checkbox" th:value="${sport}" th:field="${formular.sporty}"/>
+                    <label class="form-check-label" for="sport" th:text="${sport.displayValue}">Chlapec</label>
+                </div>
+                <div class="error" th:if="${#fields.hasErrors('formular.sporty')}" th:errors="${formular.sporty}"></div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="email" class="col-sm-2 col-form-label">Email:</label>
+            <div class="col-sm-3">
+                <input type="email" class="form-control" id="email" th:field="${formular.email}" />
+            </div>
+            <div class="error" th:if="${#fields.hasErrors('formular.email')}" th:errors="${formular.email}"></div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="telefon" class="col-sm-2 col-form-label">Telefon:</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="telefon" th:field="${formular.telefon}" />
+            </div>
+            <div class="error" th:if="${#fields.hasErrors('formular.telefon')}" th:errors="${formular.telefon}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Rezervovat</button>
+    </form>
+</div>
 </body>
 </html>

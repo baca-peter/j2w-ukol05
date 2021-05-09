@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrace na letní dětský tábor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <form>
+        <h1>Rekapitulace registrace</h1>
+        <div class="row mb-3">
+            <label for="meno" class="col-sm-2 col-form-label">Meno:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="meno" th:field="${formular.meno}" readonly/>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="priezvisko" class="col-sm-2 col-form-label">Priezvisko:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="priezvisko" th:field="${formular.priezvisko}" readonly/>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="datum-narodenia" class="col-sm-2 col-form-label">Dátum narodenia:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="datum-narodenia" th:field="${formular.datumNarodenia}" readonly/>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="pohlavie" class="col-sm-2 col-form-label">Pohlavie:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="pohlavie" th:field="${formular.pohlavie.displayValue}" readonly/>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="turnus" class="col-sm-2 col-form-label">Turnus:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="turnus" th:field="${formular.turnus}" readonly/>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="sport" class="col-form-label col-sm-2 pt-0">Športy:</label>
+            <div class="col-sm-3">
+                <div th:each="sport : ${formular.sporty}">
+                    <input class="form-control" id="sport" type="text" th:value="${sport.displayValue}" readonly/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3" th:if="${formular.email} != null">
+            <label for="email" class="col-sm-2 col-form-label">Email:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="email" th:field="${formular.email}" readonly/>
+            </div>
+        </div>
+
+        <div class="row mb-3" th:if="${formular.telefon} != null">
+            <label for="telefon" class="col-sm-2 col-form-label">Telefon:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="telefon" th:field="${formular.telefon}" readonly/>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
